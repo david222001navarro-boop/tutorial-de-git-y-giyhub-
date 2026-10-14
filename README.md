@@ -270,3 +270,25 @@ Resumen
 Personalizar Git te ayuda a trabajar más cómodo y a mantener estándares de calidad automáticamente mediante atributos y hooks.
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
+
+Capítulo 9: Git y Otros Sistemas
+> No siempre se parte desde cero: muchos proyectos viven en otros sistemas de control de versiones. Git puede interactuar con ellos y también importar su historia.
+9.1 Git como cliente
+Puedes usar Git como cliente de otros sistemas y conservar sus ventajas (ramas locales, commits sin conexión):
+Subversion: con `git svn`.
+Mercurial: mediante puentes como `git-remote-hg`.
+Perforce: con `git p4`.
+```bash
+git svn clone <url-del-repositorio-svn>
+git svn dcommit               # envía tus commits al servidor Subversion
+git svn rebase                # trae los cambios nuevos
+```
+9.2 Migración a Git
+Para abandonar el sistema anterior y pasar todo a Git:
+Con Subversion, Mercurial o Perforce se usan herramientas de importación que convierten el historial en commits de Git.
+Para sistemas poco comunes se puede escribir un importador propio con `git fast-import`.
+Después de migrar, verifica ramas, etiquetas y autores (se suele mapear usuarios a nombres y correos).
+Resumen
+Git convive con otros sistemas: puedes usarlo como cliente mientras la organización migra, o importar todo el historial para empezar de lleno con Git.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
