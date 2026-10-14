@@ -244,35 +244,29 @@ Estas herramientas te dan control fino sobre la historia y la depuración. Úsal
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
-Capítulo 7: Herramientas de Git
-> Más allá de commit y push, Git incluye herramientas avanzadas para seleccionar commits, reescribir la historia, buscar errores y manejar proyectos complejos.
-7.1 a 7.3 Selección, organización interactiva y stash
-Referencias relativas: `HEAD~2`, rangos `A..B` y `git reflog` para ver movimientos recientes.
-`git add -p` permite preparar solo partes de un archivo.
-`git stash` guarda cambios sin confirmar para retomarlos después.
+Capítulo 8: Personalización de Git
+> Git es muy configurable: puedes ajustar su comportamiento, definir reglas para tus archivos y automatizar acciones con ganchos (hooks).
+8.1 Configuración de Git
+La configuración tiene tres niveles: `--system` (todo el equipo), `--global` (tu usuario) y `--local` (solo el repositorio).
 ```bash
-git stash
-git stash list
-git stash pop                 # recupera y elimina el stash
-git clean -n                   # simula la limpieza de archivos sin seguimiento
+git config --global core.editor "code --wait"
+git config --global commit.template ~/.gitmessage
+git config --global core.autocrlf true     # saltos de línea en Windows
+git config --global color.ui auto
+git config --global help.autocorrect 10    # corrige comandos mal escritos
 ```
-7.4 y 7.5 Firmar y buscar
-Firma commits y etiquetas con GPG: `git commit -S`, `git tag -s`.
-`git grep` busca texto en el proyecto y `git log -S "texto"` busca cuándo se añadió o quitó.
-7.6 y 7.7 Reescribir la historia y reset
-```bash
-git rebase -i HEAD~3          # reordena, une o edita los 3 últimos commits
-git reset --soft HEAD~1       # deshace el commit, conserva todo preparado
-git reset --mixed HEAD~1      # deshace el commit, conserva archivos (por defecto)
-git reset --hard HEAD~1       # descarta commit y cambios (peligroso)
-```
-7.8 a 7.14 Otras herramientas
-Fusión avanzada y rerere: Git recuerda cómo resolviste un conflicto para reutilizarlo.
-Depuración: `git blame` muestra quién cambió cada línea y `git bisect` encuentra el commit que introdujo un error.
-Submódulos: incluyen otro repositorio dentro del tuyo (`git submodule add`).
-Bundles empaquetan un repositorio en un archivo; replace sustituye objetos; el almacén de credenciales evita escribir la contraseña cada vez.
+8.2 Git Attributes
+El archivo `.gitattributes` define cómo trata Git ciertos archivos. Sirve, por ejemplo, para:
+Marcar archivos como binarios o definir cómo compararlos.
+Excluir archivos al exportar el proyecto (`export-ignore`).
+Elegir estrategias de fusión para archivos concretos.
+8.3 Puntos de enganche (hooks)
+Los hooks son scripts que Git ejecuta ante ciertos eventos. Viven en la carpeta `.git/hooks`.
+Del lado del cliente: `pre-commit` (revisar antes de confirmar), `prepare-commit-msg`, `commit-msg` (validar el mensaje) y `post-commit`.
+Del lado del servidor: `pre-receive`, `update` y `post-receive`, útiles para imponer reglas al recibir un push.
+8.4 Ejemplo de política
+Con un hook en el servidor se puede exigir un formato en los mensajes de commit, restringir quién modifica ciertas carpetas o rechazar pushes que no sean avances rápidos (fast-forward).
 Resumen
-Estas herramientas te dan control fino sobre la historia y la depuración. Úsalas con cuidado: reescribir la historia solo es seguro en commits que aún no has compartido.
+Personalizar Git te ayuda a trabajar más cómodo y a mantener estándares de calidad automáticamente mediante atributos y hooks.
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
-
