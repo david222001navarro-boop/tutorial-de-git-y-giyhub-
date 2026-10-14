@@ -148,12 +148,38 @@ cat ~/.ssh/id_ed25519.pub
 git init --bare proyecto.git      # en el servidor
 ```
 4.5 a 4.9 Demonio, GitWeb, GitLab y alojamiento externo
-`git daemon` publica repositorios en solo lectura por el puerto 9418.
+git daemon` publica repositorios en solo lectura por el puerto 9418.
 GitWeb ofrece una interfaz web sencilla para explorar repositorios.
 GitLab es una plataforma completa que puedes instalar en tu servidor.
 Los alojamientos externos (GitHub, GitLab.com, Bitbucket) evitan mantener infraestructura propia.
 Resumen
 Puedes alojar tus repositorios en tu propio servidor con SSH o usar un servicio externo. Para proyectos pequeños, un alojamiento externo es la opción más práctica.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
+
+Capítulo 5: Git en Entornos Distribuidos
+> Al ser distribuido, Git permite organizar el trabajo en equipo de muchas formas. Este capítulo presenta los flujos más comunes y cómo contribuir o mantener un proyecto.
+5.1 Flujos de trabajo distribuidos
+Centralizado: todos suben a un único repositorio compartido.
+Gestor de integración: cada persona tiene su copia pública; una persona fusiona las contribuciones (el modelo de fork y pull request).
+Dictador y tenientes: jerarquía para proyectos enormes, como el kernel de Linux.
+5.2 Contribuyendo a un proyecto
+Haz commits pequeños y con un solo propósito.
+Comprueba espacios en blanco antes de confirmar con `git diff --check`.
+Escribe buenos mensajes: una línea de resumen corta y, si hace falta, una explicación detallada.
+En proyectos públicos: haz un fork, crea una rama temática, sube cambios y abre un pull request.
+También se pueden enviar parches por correo con `git format-patch` y `git send-email`.
+5.3 Manteniendo un proyecto
+Quien mantiene un proyecto revisa y aplica contribuciones recibidas:
+```bash
+git apply parche.diff         # aplica un parche
+git am parche.mbox            # aplica parches recibidos por correo
+git cherry-pick <commit>      # trae un commit concreto
+git describe main             # nombre legible para una versión
+git shortlog                  # resumen de contribuciones
+```
+Resumen
+Hay varios flujos de colaboración; el más popular en GitHub es el de fork y pull request. Commits claros y atómicos facilitan el trabajo de quien revisa.
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
