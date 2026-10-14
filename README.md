@@ -183,4 +183,32 @@ Hay varios flujos de colaboración; el más popular en GitHub es el de fork y pu
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
+Capítulo 6: GitHub
+> GitHub es la mayor plataforma de alojamiento de repositorios Git. Añade herramientas de colaboración como forks, pull requests, incidencias (issues) y organizaciones.
+6.1 Creación y configuración de la cuenta
+Crea tu cuenta gratuita en github.com y verifica tu correo.
+Activa la autenticación en dos pasos para proteger tu cuenta.
+Añade tu clave SSH o usa autenticación por navegador para hacer `push` sin escribir la contraseña.
+6.2 Participando en proyectos
+El flujo típico para contribuir a un proyecto ajeno es:
+Fork: crea tu copia del repositorio en tu cuenta.
+Clona tu fork y crea una rama temática.
+Haz commits, súbelos a tu fork y abre un pull request.
+Responde a los comentarios de la revisión; los nuevos commits se agregan al mismo PR.
+```bash
+git remote add upstream <url-del-original>
+git fetch upstream
+git merge upstream/main       # mantén tu fork actualizado
+```
+6.3 Mantenimiento de un proyecto
+Crea el repositorio y añade colaboradores.
+Gestiona pull requests: revisar, comentar, fusionar o cerrar.
+Usa menciones (`@usuario`) y referencias a incidencias (`#12`).
+Archivos útiles: `README.md`, `CONTRIBUTING.md` y `LICENSE`.
+6.4 y 6.5 Organizaciones y scripting
+Las organizaciones agrupan repositorios y personas en equipos con permisos. Para automatizar tareas, GitHub ofrece una API y webhooks que avisan a otros servicios cuando ocurre un evento.
+Resumen
+GitHub convierte Git en una plataforma de colaboración. Con fork, pull request y buena documentación puedes aportar a cualquier proyecto abierto o gestionar el tuyo.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
