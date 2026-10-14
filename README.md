@@ -127,5 +127,34 @@ Las ramas te dejan experimentar con seguridad. Aprendiste a crearlas, fusionarla
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
+Capítulo 4: Git en el Servidor
+> Para colaborar necesitas un repositorio remoto accesible. Este capítulo explica los protocolos disponibles y cómo montar tu propio servidor o usar uno externo.
+4.1 Los protocolos
+Local: el remoto es otra carpeta del mismo equipo o de una red compartida.
+HTTP: simple de abrir en cualquier red; el HTTP inteligente admite lectura y escritura.
+SSH: el más usado para escribir; usa autenticación con claves.
+Git: demonio de solo lectura, muy rápido pero sin autenticación.
+4.2 Configurando Git en un servidor
+En el servidor se usa un repositorio desnudo (bare), que solo contiene los datos de Git, sin archivos de trabajo:
+```bash
+git clone --bare mi_proyecto mi_proyecto.git
+scp -r mi_proyecto.git usuario@servidor:/srv/git
+```
+4.3 y 4.4 Clave pública SSH y configuración
+Cada colaborador genera su clave y entrega la parte pública para añadirla al archivo `authorized_keys` del usuario `git` en el servidor.
+```bash
+ssh-keygen -t ed25519 -C "tu-correo@ejemplo.com"
+cat ~/.ssh/id_ed25519.pub
+git init --bare proyecto.git      # en el servidor
+```
+4.5 a 4.9 Demonio, GitWeb, GitLab y alojamiento externo
+`git daemon` publica repositorios en solo lectura por el puerto 9418.
+GitWeb ofrece una interfaz web sencilla para explorar repositorios.
+GitLab es una plataforma completa que puedes instalar en tu servidor.
+Los alojamientos externos (GitHub, GitLab.com, Bitbucket) evitan mantener infraestructura propia.
+Resumen
+Puedes alojar tus repositorios en tu propio servidor con SSH o usar un servicio externo. Para proyectos pequeños, un alojamiento externo es la opción más práctica.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
 
