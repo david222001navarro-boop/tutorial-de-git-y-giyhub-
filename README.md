@@ -93,5 +93,39 @@ Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 
 
 *Fuente: Scott Chacon y Ben Straub,* [*Pro Git*](https://git-scm.com/book/es/v2)*, 2.ª edición (licencia CC BY-NC-SA 3.0).*
 
+Capítulo 3: Ramificaciones en Git
+> Las ramas permiten trabajar en una línea de desarrollo separada sin afectar el trabajo principal. En Git son muy baratas y rápidas, y es una de sus características más potentes.
+3.1 ¿Qué es una rama?
+Una rama es un apuntador móvil a un commit. HEAD señala la rama en la que estás trabajando; la rama inicial suele llamarse `main` (antes `master`).
+3.2 Ramificar y fusionar
+```bash
+git branch nueva-rama         # crea la rama
+git checkout -b nueva-rama    # crea y cambia (también: git switch -c)
+git checkout main
+git merge nueva-rama          # fusiona en la rama actual
+```
+Conflictos de fusión
+Si dos ramas modifican la misma parte de un archivo, Git marca el conflicto con `<<<<<<<`, `=======` y `>>>>>>>`. Edita el archivo, deja la versión correcta, y luego ejecuta `git add` y `git commit` para cerrar la fusión.
+3.3 Gestión de ramas
+```bash
+git branch -v                 # última confirmación de cada rama
+git branch --merged           # ramas ya fusionadas
+git branch -d nueva-rama      # borra una rama fusionada
+```
+3.4 Flujos de trabajo ramificados
+Ramas de larga duración: por ejemplo `main` (estable) y `develop` (pruebas).
+Ramas temáticas: cortas, para una sola funcionalidad o corrección; se fusionan y se borran.
+3.5 y 3.6 Ramas remotas y rebase
+Regla de oro: no hagas rebase de commits que ya publicaste y otras personas usan.
+```bash
+git push origin nueva-rama     # publica la rama
+git push origin --delete nueva-rama
+git rebase main               # reaplica tus commits sobre main
+```
+Resumen
+Las ramas te dejan experimentar con seguridad. Aprendiste a crearlas, fusionarlas, resolver conflictos, gestionarlas y sincronizarlas con el remoto.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
+
 
 
