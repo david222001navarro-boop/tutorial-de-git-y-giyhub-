@@ -212,3 +212,35 @@ GitHub convierte Git en una plataforma de colaboración. Con fork, pull request 
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
 
+Capítulo 7: Herramientas de Git
+> Más allá de commit y push, Git incluye herramientas avanzadas para seleccionar commits, reescribir la historia, buscar errores y manejar proyectos complejos.
+7.1 a 7.3 Selección, organización interactiva y stash
+Referencias relativas: `HEAD~2`, rangos `A..B` y `git reflog` para ver movimientos recientes.
+`git add -p` permite preparar solo partes de un archivo.
+`git stash` guarda cambios sin confirmar para retomarlos después.
+```bash
+git stash
+git stash list
+git stash pop                 # recupera y elimina el stash
+git clean -n                   # simula la limpieza de archivos sin seguimiento
+```
+7.4 y 7.5 Firmar y buscar
+Firma commits y etiquetas con GPG: `git commit -S`, `git tag -s`.
+`git grep` busca texto en el proyecto y `git log -S "texto"` busca cuándo se añadió o quitó.
+7.6 y 7.7 Reescribir la historia y reset
+```bash
+git rebase -i HEAD~3          # reordena, une o edita los 3 últimos commits
+git reset --soft HEAD~1       # deshace el commit, conserva todo preparado
+git reset --mixed HEAD~1      # deshace el commit, conserva archivos (por defecto)
+git reset --hard HEAD~1       # descarta commit y cambios (peligroso)
+```
+7.8 a 7.14 Otras herramientas
+Fusión avanzada y rerere: Git recuerda cómo resolviste un conflicto para reutilizarlo.
+Depuración: `git blame` muestra quién cambió cada línea y `git bisect` encuentra el commit que introdujo un error.
+Submódulos: incluyen otro repositorio dentro del tuyo (`git submodule add`).
+Bundles empaquetan un repositorio en un archivo; replace sustituye objetos; el almacén de credenciales evita escribir la contraseña cada vez.
+Resumen
+Estas herramientas te dan control fino sobre la historia y la depuración. Úsalas con cuidado: reescribir la historia solo es seguro en commits que aún no has compartido.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
+
