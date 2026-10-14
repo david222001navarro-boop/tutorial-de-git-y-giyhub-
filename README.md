@@ -292,3 +292,31 @@ Resumen
 Git convive con otros sistemas: puedes usarlo como cliente mientras la organización migra, o importar todo el historial para empezar de lleno con Git.
 ---
 Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
+
+Capítulo 10: Los Entresijos Internos de Git
+> Entender cómo funciona Git por dentro ayuda a usarlo mejor. Git es, en el fondo, un sistema de archivos direccionable por contenido con una interfaz de control de versiones encima.
+10.1 Fontanería y porcelana
+Los comandos de fontanería (plumbing) son de bajo nivel; los de porcelana (`add`, `commit`, `push`...) son los que usamos a diario y se apoyan en los primeros.
+10.2 Los objetos de Git
+Todo se guarda en `.git/objects`, identificado por su suma SHA-1. Hay cuatro tipos de objeto:
+blob: el contenido de un archivo.
+tree: un directorio, que apunta a blobs y otros trees.
+commit: apunta a un tree, a sus padres, y guarda autor y mensaje.
+tag: una etiqueta anotada.
+```bash
+echo "hola" | git hash-object -w --stdin
+git cat-file -p <sha1>         # muestra el contenido
+git cat-file -t <sha1>         # muestra el tipo
+```
+10.3 a 10.5 Referencias, packfiles y refspec
+Las referencias son archivos en `.git/refs` que guardan un SHA-1 con un nombre legible (ramas, etiquetas); `HEAD` apunta a la rama actual.
+Los packfiles comprimen muchos objetos en uno solo; `git gc` los genera.
+Un refspec define cómo se mapean referencias remotas y locales, por ejemplo `+refs/heads/*:refs/remotes/origin/*`.
+10.6 a 10.8 Transferencia, mantenimiento y entorno
+Protocolos de transferencia: el tonto (HTTP simple) y el inteligente (negocia qué objetos enviar).
+`git gc` optimiza el repositorio, `git fsck` revisa su integridad y permite recuperar datos perdidos.
+Variables de entorno como `GIT_DIR`, `GIT_AUTHOR_NAME` o `GIT_TRACE` modifican o depuran el comportamiento de Git.
+Resumen
+Git guarda contenido en objetos, enlazados por referencias. Conocer esta base te permite entender mejor lo que ocurre tras cada comando y recuperar información cuando algo sale mal.
+---
+Fuente: Scott Chacon y Ben Straub, Pro Git, 2.ª edición (licencia CC BY-NC-SA 3.0).
